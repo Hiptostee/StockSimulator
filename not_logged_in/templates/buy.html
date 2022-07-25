@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+  <title>Sliding Menu/title</title>
+  <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC&family=Dosis:wght@800&family=Fira+Sans&family=Mingzat&family=Poppins&family=Prompt:wght@200&family=Shadows+Into+Light&family=Titan+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <main>
+    <section class = "glass">
+      <div class = "main_menu">
+        <ul>
+          <li class = "menu_item"><a href = "homepage.html"><i class = "fa fa-home"></i>Home</li></a>
+          <li class = "menu_item"><a href = "login.html"><i class = "fa fa-bell"></i>Log-out</li></a>
+          <li class = "menu_item"><a href = "sign_up.html"><i class = "fa fa-folder-open "></i>My Portfolio</li></a>
+          <li class = "menu_item"><a href = "buy.html"><i class = "fa fa-money"></i>Buy</li></a>
+          <li class = "menu_item"><a href = "sign_up.html"><i class = "fa fa-line-chart "></i>Sell</li></a>
+          <li class = "menu_item"><a href = "aboutus2.html"><i class = "fa fa-id-card-o"></i>About Us</li></a>
+          <li class = "menu_item"><a href = "help2.html"><i class = "fa fa-globe"></i>Help</li> </a>
+        </ul>
+      </div>
+      <section class = "text">
+        <strong><div class = "title_text">
+            <h1>Buy Stocks</h1>
+        </div></strong>
+        <form id = "buyform", action = '/buy.html', method = "post">
+          <div class="container">
+            <p class = "moneyicount">Transaction fees are 1% of the value of your account</p>
+            <hr style = "color: black">
+            <label>Stock Symbol : </label>
+            <input name = "user_input_buy" id = "user_input_buy" type="text" placeholder="Symbol" required>
+            <label>How Many Shares : </label>
+            <input name = "pass_input_buy" id = "pass_input_buy" type="text" placeholder="Amount" required>
+            <button type="submit">Purchase</button>
+            {% if error %}
+            <hr>
+            <p class = "h31">{{error}}</p>
+            {% endif %}
+          </div>
+          {% if total %}
+            <div class = "div_table">
+              <table title = "Transaction Details">
+                <tr>
+                  <th >Stock Symbol:</th>
+                  <th>Amount Purchased:</th>
+                  <th>Price:</th>
+                  <th>Total:</th>
+                </tr>
+                <tr>
+                  <td>{{stock_symbol}}</td>
+                  <td>{{amount}}</td>
+                  <td>{{price}}</td>
+                  <td>{{total}}</td>
+                </tr>
+              </table>
+            </div>
+          {% endif %}
+        </form>
+      </section>
+    </section>
+    <div class = "circle1"></div>
+    <div class = "circle2"></div>
+    <div class = "circle3"></div>
+    <div class = "circle4"></div>
+</main>
+</body>
+
+</html>

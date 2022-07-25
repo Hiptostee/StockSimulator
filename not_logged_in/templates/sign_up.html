@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+  <title>Sliding Menu/title</title>
+  <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC&family=Dosis:wght@800&family=Fira+Sans&family=Mingzat&family=Poppins&family=Prompt:wght@200&family=Shadows+Into+Light&family=Titan+One&display=swap" rel="stylesheet"></head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <main>
+    <section class = "glass">
+      <div class = "main_menu">
+        <ul>
+          <li class = "menu_item"><a href = "index.html"><i class = "fa fa-home"></i>Home</li></a>
+          <li class = "menu_item"><a href = "login.html"><i class = "fa fa-bell"></i>Log-In</li></a>
+          <li class = "menu_item"><a href = "sign_up.html"><i class = "fa fa-paper-plane"></i>Sign-Up</li></a>
+          <li class = "menu_item"><a href = "aboutus.html"><i class = "fa fa-id-card-o"></i>About Us</li></a>
+          <li class = "menu_item"><a href = "help.html"><i class = "fa fa-globe"></i>Help</li> </a>
+        </ul>
+      </div>
+
+      <section class = "text">
+        <strong><div class = "title_text">
+          <h1> Sign up </h1>
+        </strong></div>
+
+        <form id = "signup_form", action = '/sign_up.html', method = "post">
+          <div class="container">
+            <p class = "moneyicount">When you sign up, you will start with $10,000 virtual money to start your investing!</p>
+            <hr>
+            <label class = "label2">Username: </label>
+            <input class = "name" type="text" placeholder="Create Username" name="name" required>
+            <label class = "label2">Password: </label>
+            <input class = "pass" type="password" placeholder="Create Password" name="pass" required>
+            <button id = "button" type = "submit">Sign up!</button>
+            <hr>
+            <p>Already have an account? <a href = "login.html" class = "signin">Log in</a></p>
+            {% if output %}
+            <p class = "h31">{{output}}</p>
+            {% endif %}
+          </div>
+        </form>
+      </section>
+    </section>
+    <div class = "circle1"></div>
+    <div class = "circle2"></div>
+    <div class = "circle3"></div>
+    <div class = "circle4"></div>
+</main>
+</body>
+
+</html>

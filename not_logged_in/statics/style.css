@@ -1,0 +1,429 @@
+
+/*main entire page formating*/
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    main{
+      background: linear-gradient(to right top,#000000,#26292a, #283034, #2a3d44);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .title_text{
+      position: absolute;
+      width: 91%;
+      height: 8.36vw;
+      text-align: center;
+      background: linear-gradient(to left bottom,#000000,#26292a, #283034, #2a3d44);
+      font-size: 4vw;
+      color: #64bff7;
+      box-shadow: 4px 3px 8px 1px white;
+      top:0;
+      color: #426696;
+      border-top-right-radius: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+/*main entire page formating*/
+
+
+
+/*section formating*/
+
+    .glass{
+      background: white;
+      min-height: 80vh;
+      width: 60%;
+      background: white;
+      background: linear-gradient(to right bottom, rgba(255, 255,255, 0.7), rgba(255, 255, 255, 0.3));
+      border-radius: 2rem;
+      z-index: 3;
+      backdrop-filter: blur(15px);
+      box-shadow: 6px 4.5px 12px 1.5px white;
+      margin: 2vw;
+    }
+
+    .text{
+      width: 91%;
+      float: right;
+    }
+
+/*section formating*/
+
+
+
+/* circles */
+
+    .circle1,.circle2,.circle3,.circle4
+    {
+      background: white;
+      background: linear-gradient(to right bottom, rgba(100,191,247, 0.8), rgba(255, 255, 255, 0.5));
+      position: absolute;
+      border-radius: 100%;
+      z-index: 2;
+      box-shadow: 6px 4.5px 12px 1px cyan;
+    }
+    .circle1{
+      left:10%;
+      top: 5%;
+      height: 8rem;
+      width: 8rem;
+    }
+
+    .circle2{
+      right:10%;
+      bottom: 5%;
+      height: 11rem;
+      width: 11rem;
+    }
+    .circle3{
+      left:10%;
+      bottom: 15%;
+      height: 15rem;
+      width: 15rem;
+    }
+    .circle4{
+      right:8%;
+      top: 20%;
+      height: 6rem;
+      width: 6rem;
+    }
+    .h31{
+      color: red;
+      font-size: 1.3vw;
+      display: inline-block;
+      margin-left: 0vw;
+    }
+
+/* circles */
+
+
+
+/* whole tags */
+
+    h3{
+      margin-top: 5vw;
+      margin-left: 2vw;
+      display: inline-block;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    a{
+      text-decoration: none;
+      color: white;
+    }
+
+/* whole tags */
+
+
+
+/* main menu */
+    .main_menu{
+      position: fixed;
+      backdrop-filter: blur(3rem);
+      top:0;
+      left:0;
+      width: 70px;
+      height: 100%;
+      background: linear-gradient(to left, rgba(78, 78, 78, 1), rgba(78, 78, 78, 0.7));
+      border-top-left-radius: 2rem;
+      border-bottom-left-radius: 2rem;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: 0.3s ease;
+      z-index: 999;
+    }
+
+    .main_menu:hover{
+      width:270px;
+    }
+
+    .main_menu .menu_item{
+      padding: 10px;
+    }
+
+    .main_menu .menu_item:hover{
+      background-color: #d6d6d6;
+      cursor: pointer;
+    }
+
+    .main_menu .menu_item .fa{
+      font-size: 25px;
+      width: 40px;
+      padding:10px;
+    }
+
+    .fa{
+      color: black;
+    }
+
+
+/* main menu */
+
+
+
+
+/* homepage text */
+
+    .title_what_do_we_do{
+      position: absolute;
+      width: 91%;
+      height: 3.57vw;
+      text-align: center;
+      top: 10.29vw;
+      color:black;
+      font-size: 3vw;
+      font-weight: 1000;
+    }
+
+    .para_what_do_we_do{
+        position: absolute;
+        width: 70%;
+        height: 7.14vw;
+        color: #426696;
+        text-align: center;
+        font-size: 1.9vw;
+        top: 12.7vw;
+        margin-left: 12%;
+      }
+
+    .title_why_do_we_do_it{
+      position: absolute;
+      width: 91%;
+      height: 3.57vw;
+      text-align: center;
+      top: 25.57vw;
+      color:black;
+      font-size: 3vw;
+      font-weight: 1000;
+    }
+
+    .para_why_do_we_do_it{
+      position: absolute;
+      width: 70%;
+      height: 3.57vw;
+      color: #426696;
+      text-align: center;
+      font-size: 1.9vw;
+      top: 28.14vw;
+      margin-left: 12%;
+    }
+
+/* homepage text */
+
+
+
+/* about page */
+
+    .mission{
+      position: absolute;
+      width: 100%;
+      height: 3.57vw;
+      text-align: center;
+      top: 9.29vw;
+      color: black;
+      font-size: 3vw;
+      font-weight: 1000;
+
+    }
+
+    .mission_para{
+      position: absolute;
+      width: 90%;
+      height: 7.14vw;
+      color: #426696;
+      text-align: center;
+      font-size: 1.5vw;
+      top: 11.89vw;
+    }
+
+    .about{
+      position: absolute;
+      width: 100%;
+      height: 3.57vw;
+      text-align: center;
+      top: 24.6vw;
+      color:black;
+      font-size: 3vw;
+      font-weight: 1000;
+
+    }
+    .about_para{
+      position: absolute;
+      width: 90%;
+      height: 3.57vw;
+      color: #426696;
+      text-align: center;
+      font-size: 1.5vw;
+      top: 27.14vw;
+    }
+
+/* about page */
+
+
+
+/* help page text */
+
+    .title_how_program_works{
+      position: absolute;
+      width: 100%;
+      height: 3.57vw;
+      top: 10.29vw;
+      color: black;
+      font-size: 3vw;
+      font-weight: 1000;
+      margin-left: 9.1%;
+    }
+
+    .para_how_program_works{
+      position: absolute;
+      width: 70%;
+      height: 7.14vw;
+      color: #426696;
+      text-align: center;
+      font-size: 1.5vw;
+      top: 13.89vw;
+      margin-left: 10%;
+
+    }
+
+    .title_contact_us{
+      position: absolute;
+      width: 100%;
+      height: 3.57vw;
+      top: 26.57vw;
+      color:black;
+      font-size: 3vw;
+      font-weight: 1000;
+      margin-left: 16%;
+
+    }
+
+    .para_contact_us{
+      position: absolute;
+      width: 80%;
+      height: 3.57vw;
+      color: #426696;
+      text-align: center;
+      font-size: 1.5vw;
+      top: 30.14vw;
+      margin-left: 6%;
+      z-index: 998;
+    }
+
+/* help page text */
+
+
+
+/* input */
+    .signin{
+      color: #426696;
+    }
+
+    input[type=text], input[type=password] {
+      background-color:#26292a;
+      color: white;
+      top: 10vw;
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 1.7rem;
+    }
+
+    button {
+      background-color: #4CAF50;
+      width: 100%;
+      color: white;
+      padding: 15px;
+      margin: 10px 0px;
+      border: 3px solid gray;
+      cursor: pointer;
+      border-radius: 2rem;
+      background-color #20bf55;
+      background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+    }
+    input[type=text], input[type=password] {
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px 20px;
+      display: inline-block;
+      border: 2px solid green;
+      box-sizing: border-box;
+    }
+     button:hover {
+      opacity: 0.7;
+      border-color: white;
+    }
+
+    .label{
+      color: #426696;
+      font-size: 2vw;
+    }
+
+    .label2{
+      color: #426696;
+      font-size: 1.75vw;
+    }
+
+    .moneyicount{
+      color: red;
+    }
+
+    .container{
+      color: white;
+      margin-top: 10vw;
+      margin-left: 10vw;
+      margin-right:10vw;
+      padding: 25px;
+      margin-bottom: 2vw;
+      background: linear-gradient(to right bottom, rgba(255, 255,255, 0.7), rgba(255, 255, 255, 0.3));
+      border-radius: 1rem;
+    }
+
+/* input */
+
+
+
+/* transaction details */
+
+    table{
+      margin:5%;
+      width: 70%;
+      background: linear-gradient(to right bottom, rgba(255, 255,255, 0.7), rgba(255, 255, 255, 0.3));
+      padding: 15px;
+      text-align: center;
+    	border: none;
+      border-radius: 2rem;
+      text-transform: uppercase;
+      margin-left: 12.1%;
+
+    }
+
+    th{
+      padding: 20px;
+      text-align: center;
+      border: 1px solid white;
+      border-width: 0px 0px 2px 0px;
+      color:#426696;
+    }
+
+    tr{
+      color: red;
+    }
+    .div_table{
+      margin-left: 3vw;
+    }
+
+/* transaction details */
