@@ -398,8 +398,8 @@
 
 /* transaction details */
 
-    table{
-      margin:5%;
+    .table1{
+      margin: 5%;
       width: 70%;
       background: linear-gradient(to right bottom, rgba(255, 255,255, 0.7), rgba(255, 255, 255, 0.3));
       padding: 15px;
@@ -408,10 +408,10 @@
       border-radius: 2rem;
       text-transform: uppercase;
       margin-left: 12.1%;
-
+      font-size: 1.2vw;
     }
 
-    th{
+    .th1{
       padding: 20px;
       text-align: center;
       border: 1px solid white;
@@ -419,11 +419,55 @@
       color:#426696;
     }
 
-    tr{
+    .tr1{
       color: red;
+
     }
     .div_table{
       margin-left: 3vw;
     }
+
+    .table2{
+      margin:5%;
+      width: 90%;
+      margin-top: 12vw;
+      background: linear-gradient(to right bottom, rgba(255, 255,255, 0.7), rgba(255, 255, 255, 0.3));
+      padding: 15px;
+      text-align: center;
+      border: none;
+      border-radius: 1.3rem;
+      text-transform: uppercase;
+      margin-left: 5%;
+      font-size: 0.8vw;
+      border-spacing: 1vw 1.5vw;
+
+    }
+
+    .tr2  {
+      padding-bottom: 50px;
+    }
+
+    .th2 {
+      font-size: 1vw;
+      text-align: center;
+      border: 1px solid white;
+      border-width: 0px 0px 2px 0px;
+      color:#426696;
+    }
+
+    .red{
+      color: red;
+      border: 2px solid white;
+
+    }
+
+    .green{
+      color: green;
+    }
+
+    .black{
+      color: black;
+    }
+
 
 /* transaction details */

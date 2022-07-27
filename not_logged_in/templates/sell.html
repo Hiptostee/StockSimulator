@@ -24,46 +24,59 @@
           <li class = "menu_item"><a href = "aboutus2.html"><i class = "fa fa-id-card-o"></i>About Us</li></a>
           <li class = "menu_item"><a href = "help2.html"><i class = "fa fa-globe"></i>Help</li> </a>
           <li class = "menu_item"><a href = "delete_account.html"><i class = "fa fa-trash-o"></i>Delete Account</li> </a>
-
         </ul>
       </div>
       <section class = "text">
         <strong><div class = "title_text">
-            <h1>Buy Stocks</h1>
+            <h1>Sell Stocks</h1>
         </div></strong>
-        <form id = "buyform", action = '/buy.html', method = "post">
-          <div class="container">
-            <p class = "moneyicount">Transaction fees are 1% of the value of your account</p>
-            <hr style = "color: black">
-            <label>Stock Symbol : </label>
-            <input name = "user_input_buy" id = "user_input_buy" type="text" placeholder="Symbol" required>
-            <label>How Many Shares : </label>
-            <input name = "pass_input_buy" id = "pass_input_buy" type="text" placeholder="Amount" required>
-            <button type="submit">Purchase</button>
-            {% if error %}
-            <hr>
-            <p class = "h31">{{error}}</p>
-            {% endif %}
-          </div>
-          {% if total %}
-            <div class = "div_table">
-              <table class = "table1" title = "Transaction Details">
-                <tr class = "tr1">
-                  <th class = "th1">Stock Symbol:</th>
-                  <th class = "th1">Amount Purchased:</th>
-                  <th class = "th1">Price:</th>
-                  <th class = "th1">Total:</th>
-                </tr>
-                <tr>
-                  <td>{{stock_symbol}}</td>
-                  <td>{{amount}}</td>
-                  <td>{{price}}</td>
-                  <td>{{total}}</td>
-                </tr>
-              </table>
-            </div>
-          {% endif %}
-        </form>
+            <table class = "table2">
+              <tr class = "tr2">
+                {% for header in headings %}
+                <th class = "th2">{{ header }}</th>
+                {% endfor %}
+              </tr>
+              {% for row in chunked_list %}
+              <tr class = "tr2">
+                {% for cell in row %}
+
+                  {% if row.index(cell) == 4 or row.index(cell) == 5 %}
+                    {% if cell|float > 0 %}
+                      {% if row.index(cell) == 5 %}
+                        <td class = "green">%{{ cell }}</td>
+                      {% endif %}
+                      {% if row.index(cell) == 4 %}
+                        <td class = "green">${{ cell }}</td>
+                      {% endif %}
+                    {% endif %}
+
+                    {% if cell|float < 0 %}
+                      {% if row.index(cell) == 5 %}
+                        <td class = "red">%{{ cell }}</td>
+                      {% endif %}
+                      {% if row.index(cell) == 4 %}
+                        <td class = "red">${{ cell }}</td>
+                      {% endif %}
+                    {% endif %}
+
+                  {% endif %}
+
+                  {% if row.index(cell) == 0 or row.index(cell) == 1  or row.index(cell) == 2 or row.index(cell) == 3 %}
+                    {% if row.index(cell) == 2 %}
+                      <td class = "black">${{cell}}</td>
+                    {% endif %}
+                    {% if row.index(cell) == 3 %}
+                      <td class = "black">${{cell}}</td>
+                    {% endif %}
+                    {% if row.index(cell) == 0 or row.index(cell) == 1 %}
+                      <td class = "black">{{cell}}</td>
+                    {% endif %}
+                  {% endif %}
+
+                {% endfor %}
+              </tr>
+              {% endfor %}
+            </table>
       </section>
     </section>
     <div class = "circle1"></div>

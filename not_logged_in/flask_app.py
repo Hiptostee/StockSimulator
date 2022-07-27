@@ -99,13 +99,7 @@ def buy():
             html = html.strip("\n")
             html = float(html)
             total = round(html * float(amount_of_stock), 2)
-            with open("C:\\Users\\joey_\\StockSimulator\\user_pass.json","r") as file:
-                data = json.load(file)
-                for i in data.keys():
-                    if i == session.get("password"):
-                        for j in data[i].values():                             #finds the worth of the users account and multiplies by 1% to get the tax rate
-                            tax = 0.01 * float(j)
-            total_final = "$" + str(round((total + tax), 2))               #total transaction cost including tax
+            total_final = "$" + str(total)               #total transaction cost including tax
             stock_symbol = stock_name                               #stock symbol
             price = "$" + str(html)                           #price per indavidual stock
             amount = amount_of_stock                               #amount of shares purchased
@@ -174,7 +168,41 @@ def delete():
                 json.dump(data2, file2, indent = 2)
                 return render_template("sign_up.html")
 
-                            
+@app.route('/sell.html')
+def sell():
+    data_list = []
+    headers = ["Date Purchased", "Stock Symbol", "Amount Paid", "Current Amount", "Profit", "Percent Gain"]
+    with open("C:\\Users\\joey_\\StockSimulator\\data.json", "r") as file:
+        data = json.load(file)
+        for i in data:
+            for j in data[i]:
+                if j == session.get("password"):
+                    for k in data[i][j]:
+                        data_list.append(k)
+                        for l in data[i][j][k]:
+                            data_list.append(l)
+                            for m in data[i][j][k][l]:
+                                data1 = float(m) * float(data[i][j][k][l][m])
+                                data_list.append(float('{:.2f}'.format(data1)))        
+                                r_dis = requests.get("https://www.marketwatch.com/investing/stock/" + l)    #gathers stock data again and calculates if the user has enough money to perform this transaction, if no then return the suer does not hve enough funds
+                                html_dis = BeautifulSoup(r_dis.text, 'lxml')
+                                html = html_dis.find(class_ = "intraday__price")
+                                html = html.text
+                                html = html.replace("$", "")
+                                html = html.strip("\n")            
+                                total = float(html) * float(int(m))
+                                data_list.append('{:.2f}'.format(total))              
+                                data2 = float(total) - float(m) * float(data[i][j][k][l][m])
+                                data_list.append('{:.2f}'.format(data2))          
+                                data_list.append('{:.4f}'.format(round(round(float(total) - float(m) * float(data[i][j][k][l][m]),4) / round(float(m) * float(data[i][j][k][l][m]),4),4)))
+        chunked_list = list()
+        chunk_size = 6
+        for i in range(0, len(data_list), chunk_size):
+            chunked_list.append(data_list[i:i+chunk_size])
+                                
+    return render_template("sell.html", headings = headers, chunked_list = chunked_list)
+            
+                           
             
             
 
