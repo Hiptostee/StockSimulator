@@ -457,8 +457,6 @@
 
     .red{
       color: red;
-      border: 2px solid white;
-
     }
 
     .green{
@@ -467,6 +465,10 @@
 
     .black{
       color: black;
+    }
+
+    .blue{
+      color: blue;
     }
 
 

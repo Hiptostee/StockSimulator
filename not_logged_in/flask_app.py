@@ -183,7 +183,7 @@ def sell():
                             data_list.append(l)
                             for m in data[i][j][k][l]:
                                 data1 = float(m) * float(data[i][j][k][l][m])
-                                data_list.append(float('{:.2f}'.format(data1)))        
+                                data_list.append('{:.2f}'.format(data1))       
                                 r_dis = requests.get("https://www.marketwatch.com/investing/stock/" + l)    #gathers stock data again and calculates if the user has enough money to perform this transaction, if no then return the suer does not hve enough funds
                                 html_dis = BeautifulSoup(r_dis.text, 'lxml')
                                 html = html_dis.find(class_ = "intraday__price")

@@ -58,6 +58,14 @@
                         <td class = "red">${{ cell }}</td>
                       {% endif %}
                     {% endif %}
+                    {% if cell|float == 0 %}
+                      {% if row.index(cell) == 5 %}
+                        <td class = "blue">%{{ cell }}</td>
+                      {% endif %}
+                      {% if row.index(cell) == 4 %}
+                        <td class = "blue">${{ cell }}</td>
+                      {% endif %}
+                    {% endif %}
 
                   {% endif %}
 
