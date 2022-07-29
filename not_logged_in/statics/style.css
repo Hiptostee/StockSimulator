@@ -471,5 +471,21 @@
       color: blue;
     }
 
+    .buttons{
+      all: initial;
+      border: 1px solid black;
+      padding: 5px;
+      color: white;
+      background-color: #004000;
+      font-family: 'Poppins', sans-serif;
+      border-radius: 2px;
+      font-size: 0.8vw;
+    }
+
+    .buttons:hover {
+     opacity: 0.7;
+     border-color: white;
+   }
+
 
 /* transaction details */

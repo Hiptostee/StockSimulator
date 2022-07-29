@@ -2,6 +2,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import session
+from flask import redirect
+from flask import url_for
 import json
 import time
 import requests
@@ -9,6 +11,7 @@ from bs4 import BeautifulSoup
 import lxml
 import random
 from datetime import date
+import copy
 
 #init
 app = Flask(__name__, template_folder='templates', static_folder='statics')
@@ -49,7 +52,8 @@ def about():
 @app.route('/login.html', methods = ["POST", "GET"])
 def login():
     username = request.form.get("user_input")                     #gets username from login form
-    session["password"] = request.form.get("pass_input")                      #gets password from login form and saves it to a session variable
+    session["password"] = request.form.get("pass_input")        #gets password from login form and saves it to a session variable
+    print(session.get("password"))
     with open("C:\\Users\\joey_\\StockSimulator\\user_pass.json", "r") as file:
         data = json.load(file)                                                    #loads user-pass.json and gathers data
     if session.get("password") in data.keys():                             #if password in the data, then log the user in and redirect to homepage
@@ -168,40 +172,96 @@ def delete():
                 json.dump(data2, file2, indent = 2)
                 return render_template("sign_up.html")
 
-@app.route('/sell.html')
+@app.route('/sell.html', methods = ["POST", "GET"])
 def sell():
     data_list = []
-    headers = ["Date Purchased", "Stock Symbol", "Amount Paid", "Current Amount", "Profit", "Percent Gain"]
+    session["chunked_list"] == []
+    print(session.get("password"))
+    session["headers"] = ["Date Purchased", "Stock Symbol", "Amount Paid", "Current Amount", "Profit", "Percent Gain", "Sell"]
     with open("C:\\Users\\joey_\\StockSimulator\\data.json", "r") as file:
         data = json.load(file)
+        flag = True
         for i in data:
-            for j in data[i]:
-                if j == session.get("password"):
-                    for k in data[i][j]:
-                        data_list.append(k)
-                        for l in data[i][j][k]:
-                            data_list.append(l)
-                            for m in data[i][j][k][l]:
-                                data1 = float(m) * float(data[i][j][k][l][m])
-                                data_list.append('{:.2f}'.format(data1))       
-                                r_dis = requests.get("https://www.marketwatch.com/investing/stock/" + l)    #gathers stock data again and calculates if the user has enough money to perform this transaction, if no then return the suer does not hve enough funds
-                                html_dis = BeautifulSoup(r_dis.text, 'lxml')
-                                html = html_dis.find(class_ = "intraday__price")
-                                html = html.text
-                                html = html.replace("$", "")
-                                html = html.strip("\n")            
-                                total = float(html) * float(int(m))
-                                data_list.append('{:.2f}'.format(total))              
-                                data2 = float(total) - float(m) * float(data[i][j][k][l][m])
-                                data_list.append('{:.2f}'.format(data2))          
-                                data_list.append('{:.4f}'.format(round(round(float(total) - float(m) * float(data[i][j][k][l][m]),4) / round(float(m) * float(data[i][j][k][l][m]),4),4)))
+            for n in data[i].keys():
+
+                if n == session.get("password"):
+                    for j in data[i]:
+                        for k in data[i][j]:
+                            data_list.append(k)
+                            for l in data[i][j][k]:
+                                data_list.append(l)
+                                for m in data[i][j][k][l]:
+                                    data1 = float(m) * float(data[i][j][k][l][m])
+                                    data_list.append('{:.2f}'.format(data1))       
+                                    r_dis = requests.get("https://www.marketwatch.com/investing/stock/" + l)    #gathers stock data again and calculates if the user has enough money to perform this transaction, if no then return the suer does not hve enough funds
+                                    html_dis = BeautifulSoup(r_dis.text, 'lxml')
+                                    html = html_dis.find(class_ = "intraday__price")
+                                    html = html.text
+                                    html = html.replace("$", "")
+                                    html = html.strip("\n")            
+                                    session["total"] = float(html) * float(int(m))
+                                    data_list.append('{:.2f}'.format(session.get("total")))              
+                                    data2 = float(session.get("total")) - float(m) * float(data[i][j][k][l][m])
+                                    data_list.append('{:.2f}'.format(data2))          
+                                    data_list.append('{:.4f}'.format(round(round(float(session.get("total")) - float(m) * float(data[i][j][k][l][m]),4) / round(float(m) * float(data[i][j][k][l][m]),4),4)))
+                                    data_list.append(len(data_list)/ 7 + 1)
+                                    flag = True
+                else:
+                    print("no data found")
+                    flag = False
+                
+
         chunked_list = list()
-        chunk_size = 6
+        chunk_size = 7
         for i in range(0, len(data_list), chunk_size):
             chunked_list.append(data_list[i:i+chunk_size])
+            session["chunked_list"] = chunked_list
+    if flag == False:
+        return render_template("sell.html", headings = session.get("headers"), chunked_list = [])
+    else:
+        return render_template("sell.html", headings = session.get("headers"), chunked_list = session.get("chunked_list"))
+@app.route('/stock_sell', methods = ["GET", "POST"])
+def sell_stock():
+    data = list(request.form.keys())
+    data = data[0]
+    chunked_list = session.get("chunked_list")
+    chunked_list.pop(int(data))
+    with open("C:\\Users\\joey_\\StockSimulator\\data.json", "r") as file:
+        data2 = json.load(file)
+        data2_copy = copy.copy(data2)
+        x = 0
+        flag = True
+        
+        for i in data2_copy:
+            if flag == True:
+                for n in data2_copy[i].keys():
+                    if n == session.get("password"):
+                        if x == int(data):
+                            with open("C:\\Users\\joey_\\StockSimulator\\data.json", "w") as file:
+                                flag = False
+                                data2.pop(i)
+                                json.dump(data2, file, indent = 2)
+                            with open("C:\\Users\\joey_\\StockSimulator\\user_pass.json","r") as file: 
+                                    data2 = json.load(file)
+                                    for i in data2.keys():
+                                        if i == session.get("password"):
+                                           for j in data2[i].values():
+                                               total2 = (j + session.get("total"))
                                 
-    return render_template("sell.html", headings = headers, chunked_list = chunked_list)
-            
+                            with open("C:\\Users\\joey_\\StockSimulator\\user_pass.json","w") as file: 
+                                for i in data2.keys():
+                                    if i == session.get("password"):
+                                        for k,v in data2[i].items():
+                                            data2[i][k] = total2
+                                            json.dump(data2, file)
+                            
+                        else:
+                            x = x + 1
+                            continue
+         
+        
+        return redirect(url_for('sell'))
+
                            
             
             
