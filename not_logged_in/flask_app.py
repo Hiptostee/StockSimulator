@@ -175,8 +175,7 @@ def delete():
 @app.route('/sell.html', methods = ["POST", "GET"])
 def sell():
     data_list = []
-    session["chunked_list"] == []
-    print(session.get("password"))
+    session["chunked_list"] = []
     session["headers"] = ["Date Purchased", "Stock Symbol", "Amount Paid", "Current Amount", "Profit", "Percent Gain", "Sell"]
     with open("C:\\Users\\joey_\\StockSimulator\\data.json", "r") as file:
         data = json.load(file)
@@ -220,46 +219,66 @@ def sell():
         return render_template("sell.html", headings = session.get("headers"), chunked_list = [])
     else:
         return render_template("sell.html", headings = session.get("headers"), chunked_list = session.get("chunked_list"))
+    
 @app.route('/stock_sell', methods = ["GET", "POST"])
 def sell_stock():
+    
+    number_list = []
     data = list(request.form.keys())
     data = data[0]
     chunked_list = session.get("chunked_list")
     chunked_list.pop(int(data))
+    
     with open("C:\\Users\\joey_\\StockSimulator\\data.json", "r") as file:
         data2 = json.load(file)
         data2_copy = copy.copy(data2)
         x = 0
         flag = True
+        flag2 = True;
+        if flag == True:
+            for i in data2_copy:
+                print(data2)
+                for n in data2_copy[i].keys():
+                    if n == session.get("password"):
+                        for j in data2_copy[i]:
+                            for k in data2_copy[i][j]:
+                                for l in data2_copy[i][j][k]:
+                                    for m in data2_copy[i][j][k][l]:
+                                        r_dis = requests.get("https://www.marketwatch.com/investing/stock/" + l)    #gathers stock data again and calculates if the user has enough money to perform this transaction, if no then return the suer does not hve enough funds
+                                        html_dis = BeautifulSoup(r_dis.text, 'lxml')
+                                        html = html_dis.find(class_ = "intraday__price")
+                                        html = html.text
+                                        html = html.replace("$", "")
+                                        html = html.strip("\n")            
+                                        session["total"] = float(html)
+                                        data1 = float(m) * session.get("total")
+                                        number_list.append(data1)
+
+            with open("C:\\Users\\joey_\\StockSimulator\\user_pass.json","r") as file:
+                data3 = json.load(file)
+                data3_copy = copy.copy(data3)
+            with open("C:\\Users\\joey_\\StockSimulator\\user_pass.json","w") as file: 
+                for i in data3_copy.keys():
+                    if i == session.get("password"):
+                        for k,v in data3_copy[i].items():
+                            data3[i][k] = data3_copy[i][k] + number_list[int(data)]
+                            json.dump(data3, file)
+                            flag = False
         
         for i in data2_copy:
-            if flag == True:
+            if flag2 == True:
                 for n in data2_copy[i].keys():
                     if n == session.get("password"):
                         if x == int(data):
                             with open("C:\\Users\\joey_\\StockSimulator\\data.json", "w") as file:
-                                flag = False
                                 data2.pop(i)
                                 json.dump(data2, file, indent = 2)
-                            with open("C:\\Users\\joey_\\StockSimulator\\user_pass.json","r") as file: 
-                                    data2 = json.load(file)
-                                    for i in data2.keys():
-                                        if i == session.get("password"):
-                                           for j in data2[i].values():
-                                               total2 = (j + session.get("total"))
-                                
-                            with open("C:\\Users\\joey_\\StockSimulator\\user_pass.json","w") as file: 
-                                for i in data2.keys():
-                                    if i == session.get("password"):
-                                        for k,v in data2[i].items():
-                                            data2[i][k] = total2
-                                            json.dump(data2, file)
-                            
+                                flag2 = False
                         else:
                             x = x + 1
                             continue
-         
-        
+
+
         return redirect(url_for('sell'))
 
                            
