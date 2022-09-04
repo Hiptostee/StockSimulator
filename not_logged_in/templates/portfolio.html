@@ -28,7 +28,7 @@
       </div>
       <section class = "text">
         <strong><div class = "title_text">
-            <h1 style = "width: 110vw;">Sell Stocks</h1>
+            <h1 style = "width: 110vw;">Your Portfolio</h1>
         </div></strong>
           {% if headings %}
             <table class = "table2">
@@ -41,8 +41,9 @@
               <tr class = "tr2">
                 {% for cell in row %}
 
-                  {% if row.index(cell) == 4 or row.index(cell) == 5 %}
+                  {% if row.index(cell) == 5 or row.index(cell) == 4 %}
                     {% if cell|float > 0 %}
+
                       {% if row.index(cell) == 5 %}
                         <td class = "green">%{{ cell }}</td>
                       {% endif %}
@@ -52,6 +53,7 @@
                     {% endif %}
 
                     {% if cell|float < 0 %}
+
                       {% if row.index(cell) == 5 %}
                         <td class = "red">%{{ cell }}</td>
                       {% endif %}
@@ -60,6 +62,7 @@
                       {% endif %}
                     {% endif %}
                     {% if cell|float == 0 %}
+
                       {% if row.index(cell) == 5 %}
                         <td class = "blue">%{{ cell }}</td>
                       {% endif %}
@@ -70,19 +73,15 @@
 
                   {% endif %}
 
-                  {% if row.index(cell) == 6 %}
-                    <form id = "buttonss", action = "/stock_sell", method = "post">
-                      <td><input type = "submit" value = "Sell" id = "{{chunked_list.index(row)}}" name = "{{chunked_list.index(row)}}" class = "buttons"></input><td>
-                    </form>
-                  {% endif %}
-
                   {% if row.index(cell) == 0 or row.index(cell) == 1  or row.index(cell) == 2 or row.index(cell) == 3 %}
                     {% if row.index(cell) == 2 %}
                       <td class = "black">${{cell}}</td>
                     {% endif %}
+
                     {% if row.index(cell) == 3 %}
                       <td class = "black">${{cell}}</td>
                     {% endif %}
+
                     {% if row.index(cell) == 0 or row.index(cell) == 1 %}
                       <td class = "black">{{cell}}</td>
                     {% endif %}
@@ -93,6 +92,7 @@
               {% endfor %}
             </table>
           {% endif %}
+        
       </section>
     </section>
     <div class = "circle1"></div>

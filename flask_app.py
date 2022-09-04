@@ -12,10 +12,12 @@ import lxml
 import random
 from datetime import date
 import copy
-
+from webui import WebUI
 
 #init
 app = Flask(__name__, template_folder='templates', static_folder='statics')
+ui = WebUI(app, debug=True) # Create a WebUI instance
+
 app.secret_key = "stocksimulator!?""__"
 @app.route("/")
 @app.route('/index.html')
@@ -23,13 +25,11 @@ def home():
     return render_template('index.html')
 
 
-
 @app.route('/sign_up.html', methods = ["POST", "GET"])
 def signup():
     username = request.form.get("name")          #gets username from form
     session["password"] = request.form.get("pass")     #gets password from form and stores to a session variable
-
-    with open("C:\\Users\\joey_\\StockSimulator\\user_pass.json", "r") as file:        #Gets data from the user_pass json file and stores to data
+    with open("user_pass.json", "r") as file:        #Gets data from the user_pass json file and stores to data
         data = json.load(file)
     if session.get("password") in data.keys():          #tries to validate signup information
         if session.get("password") == None:                #if there is no data in the user signup orm, set the output to nothing becuase if there is nothing it defaults to something unwanted
